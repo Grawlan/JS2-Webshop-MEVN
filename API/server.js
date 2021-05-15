@@ -3,8 +3,7 @@ const mongoose = require("mongoose");
 const PORT = process.env.PORT || 5000;
 
 const serverURL = "http://localhost:" + PORT;
-const mongoURL =
-  "mongodb+srv://Jonas:BytMig123@cluster0.dr9kv.mongodb.net/webshop?retryWrites=true&w=majority";
+const mongoURL = process.env.MONGOURI;
 
 app.listen(PORT, () => console.log("Webserver: " + serverURL));
 
