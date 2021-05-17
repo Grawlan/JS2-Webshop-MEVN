@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 
+// Controller Import
 const productController = require("./controllers/productController");
 
 app.use(cors());
