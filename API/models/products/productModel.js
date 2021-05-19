@@ -2,9 +2,16 @@ const mongoose = require("mongoose");
 const Product = require("./productSchema");
 
 exports.getProducts = (req, res) => {
-  Product.find()
-    .then((data) => res.status(200).json(data))
-    .catch((err) => res.status(500).json(err));
+  Product.find({}, (err, data) => {
+    if (err) {
+      return res.status(500).json({
+        statusCode: 500,
+        status: false,
+        message: err.message || "Failed to fetch products.",
+      });
+    }
+    res.status(200).json(data);
+  });
 };
 
 exports.getOneProduct = (req, res) => {
@@ -20,7 +27,13 @@ exports.getOneProduct = (req, res) => {
     if (result) {
       Product.findById(req.params.id)
         .then((product) => res.status(200).json(product))
-        .catch((err) => res.status(500).json(err));
+        .catch((err) =>
+          res.status(500).json({
+            statusCode: 500,
+            status: false,
+            message: "Something went wrong.",
+          })
+        );
     } else {
       return res.status(404).json({
         statusCode: 404,
