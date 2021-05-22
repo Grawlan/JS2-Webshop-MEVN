@@ -1,16 +1,13 @@
 <template>
-  <div>
-    <Navbar />
-    <router-view />
-  </div>
+  <ProductCardDeck />
 </template>
-<script>
-import Navbar from './components/Navbar';
-import { mapActions } from 'vuex'
 
+<script>
+import ProductCardDeck from '../components/products/ProductCardDeck'
+import { mapActions } from 'vuex'
 export default {
   components: {
-    Navbar,
+    ProductCardDeck
   },
   methods: {
     ...mapActions(['getProducts'])
@@ -18,7 +15,9 @@ export default {
   created() {
     this.getProducts()
   }
-};
+}
 </script>
 
-<style></style>
+<style>
+
+</style>

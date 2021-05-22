@@ -5,6 +5,7 @@ const auth = require("../authentication/auth");
 router.get("/", productModel.getProducts);
 router.get("/:id", productModel.getOneProduct);
 
+// restricting api calls under this middleware to logged in users.
 router.use(auth.verifyToken);
 
 router.post("/new", productModel.newProduct);
