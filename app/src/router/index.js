@@ -3,6 +3,10 @@ import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import Products from '../views/Products.vue';
 import ProductDetails from '../views/ProductDetails.vue';
+import Login from '../views/Login.vue';
+import Register from '../views/Register.vue';
+import UserControl from '../views/UserControl.vue';
+// import store from '@/store';
 
 Vue.use(VueRouter);
 
@@ -22,6 +26,21 @@ const routes = [
     name: 'ProductDetails',
     component: ProductDetails,
     props: true
+  },
+  {
+    path: '/users/login',
+    name: 'Login',
+    component: Login,
+  },
+  {
+    path: '/users/register',
+    name: 'Register',
+    component: Register,
+  },
+  {
+    path: '/users/usercontrol',
+    name: 'UserControl',
+    component: UserControl,
   },
   {
     path: '/about',

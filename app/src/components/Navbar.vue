@@ -4,7 +4,7 @@
       <!-- Container wrapper -->
       <div class="container">
         <!-- Navbar brand -->
-        <router-link class="navbar-brand" to="/">LOGO</router-link>
+        <router-link class="navbar-brand" to="/">CONSOLE</router-link>
 
         <!-- Toggle button -->
         <button
@@ -51,6 +51,7 @@
                 aria-expanded="false"
               >
                 <i class="fas fa-shopping-cart"></i>
+                <span v-show="itemsInCart" class="badge rounced-pill badge-notification bg-light text-dark">{{itemsInCart}}</span>
               </a>
               <!-- Dropdown menu -->
               <ul class="dropdown-menu dropdown-menu-end shopping-cart" aria-labelledby="navbarDropdown">
@@ -72,13 +73,13 @@
               <!-- Dropdown menu -->
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <li class="nav-item">
-                  <router-link class="nav-link text-dark" aria-current="page" to="/user">User Settings</router-link>
+                  <router-link class="nav-link text-dark" aria-current="page" to="/users/usercontrol">Order history</router-link>
                 </li>
               </ul>
             </li>
 
             <li v-if="!loggedIn">
-              <router-link class="nav-link" to="/Login">Login</router-link>
+              <router-link class="nav-link" to="/users/login">Login</router-link>
             </li>
 
           </ul>
@@ -91,18 +92,17 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import ShoppingCart from './shoppingCart/ShoppingCart'
 
 export default {
   components: {
     ShoppingCart
   },
-
-  data() {
-    return {
-      loggedIn: true
-    }
+  computed: {
+    ...mapGetters(['loggedIn', 'itemsInCart'])
   }
+  
 }
 </script>
 

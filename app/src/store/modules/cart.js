@@ -14,6 +14,13 @@ export default {
         })
       }
       return counter
+    },
+    itemsInCart: state => {
+      let counter = 0
+      state.cart.forEach(item => {
+        counter += item.quantity
+      })
+      return counter
     }
   },
   mutations: {
@@ -36,6 +43,9 @@ export default {
       let exists = state.cart.find(item => item.product._id === product._id)
       state.cart.splice(state.cart.indexOf(exists), 1)
     },
+    CLEAN_CART: state => {
+      state.cart = []
+    }
   },
   actions: {
     addProductToCart: ({commit}, {product, quantity}) => {
@@ -50,6 +60,9 @@ export default {
     },
     removeProductFromCart: ({commit}, {product}) => {
       commit('REMOVE_FROM_CART', {product})
+    },
+    cleanCart: ({commit}) => {
+      commit('CLEAN_CART')
     }
   },
 }

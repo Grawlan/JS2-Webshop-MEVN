@@ -14,18 +14,18 @@
     <div class="p-2 d-flex justify-content-between align-items-center">
       <div>
         <div class="total-price">
-          Totalt: <span>{{ shoppingCartTotal }} SEK</span>
+          Total: <span>{{ shoppingCartTotal }} SEK</span>
         </div>
         <small class="text-muted">inc. VAT</small>
       </div>
-      <button class="btn btn-primary">Save Order</button>
+      <button v-if="loggedIn" @click.stop="sendOrder" class="btn btn-primary">Save Order</button>
     </div>
 
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import ShoppingCartProduct from './ShoppingCartProduct'
 export default {
   name: 'ShoppingCart',
@@ -33,7 +33,20 @@ export default {
     ShoppingCartProduct
   },
   computed: {
-    ...mapGetters(['shoppingCart', 'shoppingCartTotal'])
+    ...mapGetters(['shoppingCart', 'shoppingCartTotal', 'loggedIn', 'getUserId'])
+  },
+  methods: {
+    ...mapActions(['saveOrder', 'cleanCart']),
+    sendOrder() {
+      let order = {
+        orderItems: this.shoppingCart,
+        orderTotal: this.shoppingCartTotal,
+        orderUserId: this.getUserId
+      }
+      this.saveOrder(order)
+      setTimeout(this.cleanCart, 1000)
+      
+    }
   }
 }
 </script>
